@@ -36,7 +36,7 @@ class FfprobeReaderTest extends \PHPUnit_Framework_TestCase
         try {
             $this->reader = new FfprobeReader(FFProbe::create());
         } catch (\Exception $e) {
-            $this->markTestSkipped('FFMpeg\FFProbe not available.');
+            $this->markTestSkipped('FfprobeReader not available.');
         }
     }
 

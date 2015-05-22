@@ -32,13 +32,17 @@ class PdfInfoReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Poppler\Processor\PdfFile not available.');
         }
 
-        $this->reader = new PdfInfoReader(
-            new PdfFile(
-                \Poppler\Driver\Pdfinfo::create(),
-                \Poppler\Driver\Pdftotext::create(),
-                \Poppler\Driver\Pdftohtml::create()
-            )
-        );
+        try {
+            $this->reader = new PdfInfoReader(
+                new PdfFile(
+                    \Poppler\Driver\Pdfinfo::create(),
+                    \Poppler\Driver\Pdftotext::create(),
+                    \Poppler\Driver\Pdftohtml::create()
+                )
+            );
+        } catch (\Exception $e) {
+            $this->markTestSkipped('PdfInfoReader not available.');
+        }
     }
 
     public function testAvailable()
