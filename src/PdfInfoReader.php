@@ -40,7 +40,7 @@ class PdfInfoReader implements ReaderInterface
      */
     public function available()
     {
-       return true;
+        return true;
     }
 
     /**

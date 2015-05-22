@@ -44,5 +44,4 @@ interface ReaderInterface
      * @return ValueBag
      */
     public function read($filename);
-
 }

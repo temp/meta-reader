@@ -26,7 +26,7 @@ class ZipExtensionReader implements ReaderInterface
      */
     public function available()
     {
-       return extension_loaded('zip');
+        return extension_loaded('zip');
     }
 
     /**
