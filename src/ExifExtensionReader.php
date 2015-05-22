@@ -11,7 +11,6 @@
 
 namespace Temp\MetaReader;
 
-use Phlexible\Component\MediaType\Model\MediaType;
 use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 

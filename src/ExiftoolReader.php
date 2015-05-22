@@ -11,9 +11,9 @@
 
 namespace Temp\MetaReader;
 
-use Phlexible\Component\MediaType\Model\MediaType;
 use PHPExiftool\Driver\Metadata\Metadata;
 use PHPExiftool\Driver\Value\ValueInterface;
+use PHPExiftool\FileEntity;
 use PHPExiftool\Reader;
 use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
@@ -57,7 +57,7 @@ class ExiftoolReader implements ReaderInterface
             return false;
         }
 
-        return $fileEntity instanceof \PHPExiftool\FileEntity;
+        return $fileEntity instanceof FileEntity;
     }
 
     /**

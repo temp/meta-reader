@@ -32,7 +32,7 @@
         "php-poppler/php-poppler": "~1.0",
         "temp/image-analyzer": "~1.0"
     },
-    "suggests": {
+    "suggest": {
         "phpexiftool/phpexiftool": "If you want to use the exif tool reader.",
         "php-ffmpeg/php-ffmpeg": "If you want to use the ffprobe reader.",
         "php-poppler/php-poppler": "If you want to use the pdfinfo reader.",
