@@ -16,9 +16,9 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Imagemagick based reader
+ * Image analyzer reader
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class ImageAnalyzerReader implements ReaderInterface
 {
