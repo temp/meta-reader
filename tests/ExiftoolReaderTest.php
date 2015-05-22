@@ -22,70 +22,53 @@ use Temp\MetaReader\ExiftoolReader;
  */
 class ExiftoolReaderTest extends \PHPUnit_Framework_TestCase
 {
-    private function createReader()
-    {
-        $logger = $this->prophesize('Monolog\Logger');
-        $logger->addInfo(Argument::cetera());
+    /**
+     * @var ExiftoolReader
+     */
+    private $reader;
 
-        return Reader::create($logger->reveal());
-    }
-
-    public function testAvailable()
+    public function setUp()
     {
         if (!class_exists('PHPExiftool\Reader')) {
             $this->markTestSkipped('PHPExiftool\Reader not available.');
         }
 
-        $reader = new ExiftoolReader($this->createReader());
+        $logger = $this->prophesize('Monolog\Logger');
+        $logger->addInfo(Argument::cetera());
 
-        $this->assertTrue($reader->available());
+        $this->reader = new ExiftoolReader(Reader::create($logger->reveal()));
     }
 
-    /**
-     * @depends testAvailable
-     */
+    public function testAvailable()
+    {
+        $this->assertTrue($this->reader->available());
+    }
+
     public function testSupportsJpgFile()
     {
-        $reader = new ExiftoolReader($this->createReader());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.jpg');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
 
         $this->assertTrue($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testSupportsTxtFile()
     {
-        $reader = new ExiftoolReader($this->createReader());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.txt');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.txt');
 
         $this->assertFalse($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadJpgFile()
     {
-        $reader = new ExiftoolReader($this->createReader());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
 
         $this->assertCount(19, $meta);
         $this->assertTrue($meta->has('exiftool.file.filetype'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadTextFile()
     {
-        $reader = new ExiftoolReader($this->createReader());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

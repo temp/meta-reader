@@ -21,71 +21,52 @@ use Temp\MetaReader\PdfInfoReader;
  */
 class PdfInfoReaderTest extends \PHPUnit_Framework_TestCase
 {
-    private function createPdfFile()
-    {
-        return new PdfFile(
-            \Poppler\Driver\Pdfinfo::create(),
-            \Poppler\Driver\Pdftotext::create(),
-            \Poppler\Driver\Pdftohtml::create()
-        );
-    }
+    /**
+     * @var PdfInfoReader
+     */
+    private $reader;
 
-    public function testAvailable()
+    public function setUp()
     {
         if (!class_exists('Poppler\Processor\PdfFile')) {
             $this->markTestSkipped('Poppler\Processor\PdfFile not available.');
         }
 
-        $reader = new PdfInfoReader($this->createPdfFile());
-
-        $this->assertTrue($reader->available());
+        $this->reader = new PdfInfoReader(
+            new PdfFile(
+                \Poppler\Driver\Pdfinfo::create(),
+                \Poppler\Driver\Pdftotext::create(),
+                \Poppler\Driver\Pdftohtml::create()
+            )
+        );
     }
 
-    /**
-     * @depends testAvailable
-     */
+    public function testAvailable()
+    {
+        $this->assertTrue($this->reader->available());
+    }
+
     public function testSupportsPdfFile()
     {
-        $reader = new PdfInfoReader($this->createPdfFile());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.pdf');
-
-        $this->assertTrue($isSupported);
+        $this->assertTrue($this->reader->supports(__DIR__ . '/fixture/file.pdf'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testSupportsTxtFile()
     {
-        $reader = new PdfInfoReader($this->createPdfFile());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.txt');
-
-        $this->assertFalse($isSupported);
+        $this->assertFalse($this->reader->supports(__DIR__ . '/fixture/file.txt'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadPdfFile()
     {
-        $reader = new PdfInfoReader($this->createPdfFile());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.pdf');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.pdf');
 
         $this->assertCount(18, $meta);
         $this->assertSame('This is a test PDF file', (string) $meta->get('pdfinfo.title'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadTextFile()
     {
-        $reader = new PdfInfoReader($this->createPdfFile());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

@@ -20,47 +20,44 @@ use Temp\MetaReader\ExifExtensionReader;
  */
 class ExifExtensionReaderTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAvailable()
+    /**
+     * @var ExifExtensionReader
+     */
+    private $reader;
+
+    public function setUp()
     {
         $reader = new ExifExtensionReader();
 
         if (!$reader->available()) {
             $this->markTestSkipped('Exif extension not loaded.');
         }
+
+        $this->reader = $reader;
     }
 
-    /**
-     * @depends testAvailable
-     */
+    public function testAvailable()
+    {
+        $this->assertTrue($this->reader->available());
+    }
+
     public function testSupportsJpgFile()
     {
-        $reader = new ExifExtensionReader();
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.jpg');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
 
         $this->assertTrue($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testSupportsTxtFile()
     {
-        $reader = new ExifExtensionReader();
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.txt');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.txt');
 
         $this->assertFalse($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadJpgFile()
     {
-        $reader = new ExifExtensionReader();
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
 
         $this->assertCount(2, $meta);
         $this->assertSame(array(
@@ -69,14 +66,9 @@ class ExifExtensionReaderTest extends \PHPUnit_Framework_TestCase
         ), $meta->toArray());
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadTextFile()
     {
-        $reader = new ExifExtensionReader();
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

@@ -22,69 +22,47 @@ use Temp\MetaReader\FfprobeReader;
  */
 class FfprobeReaderTest extends \PHPUnit_Framework_TestCase
 {
-    private function createFfprobe()
-    {
-        return FFProbe::create();
-    }
+    /**
+     * @var FfprobeReader
+     */
+    private $reader;
 
-    public function testAvailable()
+    public function setUp()
     {
         if (!class_exists('FFMpeg\FFProbe')) {
             $this->markTestSkipped('FFMpeg\FFProbe not available.');
         }
 
-        $reader = new FfprobeReader($this->createFfprobe());
-
-        $this->assertTrue($reader->available());
+        $this->reader = new FfprobeReader(FFProbe::create());
     }
 
-    /**
-     * @depends testAvailable
-     */
+    public function testAvailable()
+    {
+        $this->assertTrue($this->reader->available());
+    }
+
     public function testSupportsJpgFile()
     {
-        $reader = new FfprobeReader($this->createFfprobe());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.jpg');
-
-        $this->assertTrue($isSupported);
+        $this->assertTrue($this->reader->supports(__DIR__ . '/fixture/file.jpg'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testSupportsPdfFile()
     {
-        $reader = new FfprobeReader($this->createFfprobe());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.pdf');
-
-        $this->assertFalse($isSupported);
+        $this->assertFalse($this->reader->supports(__DIR__ . '/fixture/file.pdf'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadJpgFile()
     {
-        $reader = new FfprobeReader($this->createFfprobe());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
 
         $this->assertCount(9, $meta);
-
         $this->assertTrue($meta->has('media.format_name'));
         $this->assertTrue($meta->has('video.stream_0.codec_type'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadPdfFile()
     {
-        $reader = new FfprobeReader($this->createFfprobe());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.pdf');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.pdf');
 
         $this->assertCount(0, $meta);
     }

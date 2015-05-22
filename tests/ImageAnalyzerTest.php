@@ -11,9 +11,9 @@
 
 namespace Temp\MetaReader\Tests;
 
-use Poppler\Processor\PdfFile;
+use Temp\ImageAnalyzer\Driver\GdDriver;
 use Temp\MetaReader\ImageAnalyzerReader;
-use Temp\MetaReader\PdfInfoReader;
+use Temp\ImageAnalyzer\ImageAnalyzer;
 
 /**
  * Image analyzer reader test
@@ -22,68 +22,50 @@ use Temp\MetaReader\PdfInfoReader;
  */
 class ImageAnalyzerTest extends \PHPUnit_Framework_TestCase
 {
-    private function createImageAnalyzer()
+    /**
+     * @var ImageAnalyzerReader
+     */
+    private $reader;
+
+    public function setUp()
     {
-        return new ImageAnalyzer(
-        );
+        if (!class_exists('Temp\ImageAnalyzer\ImageAnalyzer')) {
+            $this->markTestSkipped('Temp\ImageAnalyzer not available.');
+        }
+
+        $this->reader = new ImageAnalyzerReader(new ImageAnalyzer(new GdDriver()));
     }
 
     public function testAvailable()
     {
-        if (!class_exists('Temp\ImageAnalyzer')) {
-            $this->markTestSkipped('Temp\ImageAnalyzer not available.');
-        }
-
-        $reader = new ImageAnalyzerReader($this->createImageAnalyzer());
-
-        $this->assertTrue($reader->available());
+        $this->assertTrue($this->reader->available());
     }
 
-    /**
-     * @depends testAvailable
-     */
-    public function testSupportsPdfFile()
+    public function testSupportsJpgFile()
     {
-        $reader = new ImageAnalyzerReader($this->createImageAnalyzer());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.pdf');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
 
         $this->assertTrue($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testSupportsTxtFile()
     {
-        $reader = new ImageAnalyzerReader($this->createImageAnalyzer());
-
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.txt');
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.txt');
 
         $this->assertFalse($isSupported);
     }
 
-    /**
-     * @depends testAvailable
-     */
-    public function testReadPdfFile()
+    public function testReadJpgFile()
     {
-        $reader = new ImageAnalyzerReader($this->createImageAnalyzer());
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
 
-        $meta = $reader->read(__DIR__ . '/fixture/file.pdf');
-
-        $this->assertCount(18, $meta);
-        $this->assertSame('This is a test PDF file', (string) $meta->get('pdfinfo.title'));
+        $this->assertCount(6, $meta);
+        $this->assertSame('RGB', (string) $meta->get('image.colorspace'));
     }
 
-    /**
-     * @depends testAvailable
-     */
     public function testReadTextFile()
     {
-        $reader = new ImageAnalyzerReader($this->createImageAnalyzer());
-
-        $meta = $reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }
