@@ -48,7 +48,13 @@ class ChainReader implements ReaderInterface
      */
     public function available()
     {
-        return true;
+        foreach ($this->readers as $reader) {
+            if ($reader->available()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -57,10 +63,12 @@ class ChainReader implements ReaderInterface
     public function supports($filename)
     {
         foreach ($this->readers as $reader) {
-            if ($reader->isAvailable() && $reader->supports($filename)) {
+            if ($reader->available() && $reader->supports($filename)) {
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
@@ -71,7 +79,7 @@ class ChainReader implements ReaderInterface
         $meta = new ValueBag();
 
         foreach ($this->readers as $reader) {
-            if ($reader->isAvailable() && $reader->supports($filename)) {
+            if ($reader->available() && $reader->supports($filename)) {
                 $meta->merge($reader->read($filename));
             }
         }
