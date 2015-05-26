@@ -52,7 +52,7 @@ class ExiftoolReader implements ReaderInterface
     public function supports($filename)
     {
         try {
-            $fileEntity = $this->reader->files($filename)->first();
+            $fileEntity = $this->reader->reset()->files($filename)->first();
         } catch (\Exception $e) {
             return false;
         }
@@ -68,7 +68,7 @@ class ExiftoolReader implements ReaderInterface
         $meta = new ValueBag();
 
         try {
-            $fileEntity = $this->reader->files($filename)->first();
+            $fileEntity = $this->reader->reset()->files($filename)->first();
         } catch (\Exception $e) {
             return $meta;
         }
