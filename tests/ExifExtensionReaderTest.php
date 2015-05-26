@@ -48,6 +48,13 @@ class ExifExtensionReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($isSupported);
     }
 
+    public function testSupportsPngFile()
+    {
+        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.png');
+
+        $this->assertFalse($isSupported);
+    }
+
     public function testSupportsTxtFile()
     {
         $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.txt');
@@ -64,6 +71,13 @@ class ExifExtensionReaderTest extends \PHPUnit_Framework_TestCase
             'exif.Orientation' => '1',
             'exif.Exif_IFD_Pointer' => '38',
         ), $meta->toArray());
+    }
+
+    public function testReadPngFile()
+    {
+        $meta = $this->reader->read(__DIR__ . '/fixture/file.png');
+
+        $this->assertCount(0, $meta);
     }
 
     public function testReadTextFile()

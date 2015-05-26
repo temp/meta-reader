@@ -51,7 +51,7 @@ class ExifExtensionReader implements ReaderInterface
         $meta = new ValueBag();
 
         try {
-            $result = \exif_read_data($filename, '', true);
+            $result = @\exif_read_data($filename, '', true);
         } catch (\Exception $e) {
             return $meta;
         }
