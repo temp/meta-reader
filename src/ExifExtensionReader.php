@@ -34,7 +34,13 @@ class ExifExtensionReader implements ReaderInterface
      */
     public function supports($filename)
     {
-        return @\exif_imagetype($filename) !== false;
+        try {
+            $result = @\exif_imagetype($filename);
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return $result !== false;
     }
 
     /**
@@ -44,7 +50,11 @@ class ExifExtensionReader implements ReaderInterface
     {
         $meta = new ValueBag();
 
-        $result = \exif_read_data($filename, '', true);
+        try {
+            $result = \exif_read_data($filename, '', true);
+        } catch (\Exception $e) {
+            return $meta;
+        }
 
         if (!empty($result['IFD0'])) {
             foreach ($result['IFD0'] as $key => $value) {
