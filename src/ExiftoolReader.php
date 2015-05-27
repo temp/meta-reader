@@ -73,6 +73,30 @@ class ExiftoolReader implements ReaderInterface
             return $meta;
         }
 
+        if ($fileEntity->getMetadatas()->containsKey('File:ImageWidth')) {
+            $meta->set(
+                'image.width',
+                new MetaValue((int) $fileEntity->getMetadatas()->get('File:ImageWidth')->getValue()->asString())
+            );
+        } elseif ($fileEntity->getMetadatas()->containsKey('PNG:ImageWidth')) {
+            $meta->set(
+                'image.width',
+                new MetaValue((int) $fileEntity->getMetadatas()->get('PNG:ImageWidth')->getValue()->asString())
+            );
+        }
+
+        if ($fileEntity->getMetadatas()->containsKey('File:ImageHeight')) {
+            $meta->set(
+                'image.height',
+                new MetaValue((int) $fileEntity->getMetadatas()->get('File:ImageHeight')->getValue()->asString())
+            );
+        }  elseif ($fileEntity->getMetadatas()->containsKey('PNG:ImageHeight')) {
+            $meta->set(
+                'image.height',
+                new MetaValue((int) $fileEntity->getMetadatas()->get('PNG:ImageHeight')->getValue()->asString())
+            );
+        }
+
         foreach ($fileEntity as $metadata) {
             /* @var $metadata Metadata */
 
@@ -80,14 +104,14 @@ class ExiftoolReader implements ReaderInterface
                 continue;
             }
 
-            $groupName = strtolower($metadata->getTag()->getGroupName());
-            $name = strtolower($metadata->getTag()->getName());
+            $groupName = ($metadata->getTag()->getGroupName());
+            $name = ($metadata->getTag()->getName());
             $value = (string) $metadata->getValue();
-            if ($groupName === 'system') {
+            if ($groupName === 'System') {
                 continue;
             }
 
-            $path = "exiftool.$groupName.$name";
+            $path = "$groupName.$name";
             $meta->set($path, new MetaValue($value));
         }
 
