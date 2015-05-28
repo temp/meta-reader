@@ -107,7 +107,7 @@ class ExiftoolReader implements ReaderInterface
             $groupName = ($metadata->getTag()->getGroupName());
             $name = ($metadata->getTag()->getName());
             $value = (string) $metadata->getValue();
-            if ($groupName === 'System') {
+            if ($groupName === 'System' || !ctype_print($value)) {
                 continue;
             }
 
