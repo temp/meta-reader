@@ -90,7 +90,7 @@ class ExiftoolReader implements ReaderInterface
                 'image.height',
                 new MetaValue((int) $fileEntity->getMetadatas()->get('File:ImageHeight')->getValue()->asString())
             );
-        }  elseif ($fileEntity->getMetadatas()->containsKey('PNG:ImageHeight')) {
+        } elseif ($fileEntity->getMetadatas()->containsKey('PNG:ImageHeight')) {
             $meta->set(
                 'image.height',
                 new MetaValue((int) $fileEntity->getMetadatas()->get('PNG:ImageHeight')->getValue()->asString())
