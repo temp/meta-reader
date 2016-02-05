@@ -33,7 +33,7 @@
         "temp/image-analyzer": "~1.0"
     },
     "suggest": {
-        "phpexiftool/phpexiftool": "If you want to use the exif tool reader.",
+        "alchemy/phpexiftool": "If you want to use the exif tool reader.",
         "php-ffmpeg/php-ffmpeg": "If you want to use the ffprobe reader.",
         "php-poppler/php-poppler": "If you want to use the pdfinfo reader.",
         "temp/image-analyzer": "If you want to use the image analyzer reader."
