@@ -66,10 +66,9 @@ class ExifExtensionReaderTest extends \PHPUnit_Framework_TestCase
     {
         $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
 
-        $this->assertCount(2, $meta);
+        $this->assertCount(1, $meta);
         $this->assertSame(array(
             'exif.Orientation' => '1',
-            'exif.Exif_IFD_Pointer' => '38',
         ), $meta->toArray());
     }
 
