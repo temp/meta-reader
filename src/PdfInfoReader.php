@@ -16,7 +16,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * pdfinfo reader
+ * pdfinfo reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

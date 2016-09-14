@@ -14,7 +14,7 @@ namespace Temp\MetaReader\Tests;
 use Temp\MetaReader\ZipExtensionReader;
 
 /**
- * Zip extension reader test
+ * Zip extension reader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -36,7 +36,7 @@ class ZipExtensionReaderTest extends \PHPUnit_Framework_TestCase
     {
         $reader = new ZipExtensionReader();
 
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.zip');
+        $isSupported = $reader->supports(__DIR__.'/fixture/file.zip');
 
         $this->assertTrue($isSupported);
     }
@@ -48,7 +48,7 @@ class ZipExtensionReaderTest extends \PHPUnit_Framework_TestCase
     {
         $reader = new ZipExtensionReader();
 
-        $isSupported = $reader->supports(__DIR__ . '/fixture/file.txt');
+        $isSupported = $reader->supports(__DIR__.'/fixture/file.txt');
 
         $this->assertFalse($isSupported);
     }
@@ -60,7 +60,7 @@ class ZipExtensionReaderTest extends \PHPUnit_Framework_TestCase
     {
         $reader = new ZipExtensionReader();
 
-        $meta = $reader->read(__DIR__ . '/fixture/file.zip');
+        $meta = $reader->read(__DIR__.'/fixture/file.zip');
 
         $this->assertCount(1, $meta);
         $this->assertSame('1', (string) $meta->get('zip.numFiles'));
@@ -73,7 +73,7 @@ class ZipExtensionReaderTest extends \PHPUnit_Framework_TestCase
     {
         $reader = new ZipExtensionReader();
 
-        $meta = $reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $reader->read(__DIR__.'/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

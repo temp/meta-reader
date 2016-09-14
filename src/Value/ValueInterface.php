@@ -12,7 +12,7 @@
 namespace Temp\MetaReader\Value;
 
 /**
- * Value interface
+ * Value interface.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

@@ -14,7 +14,7 @@ namespace Temp\MetaReader;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Chain reader
+ * Chain reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -28,7 +28,7 @@ class ChainReader implements ReaderInterface
     /**
      * @param ReaderInterface[] $readers
      */
-    public function __construct(array $readers = array())
+    public function __construct(array $readers = [])
     {
         foreach ($readers as $reader) {
             $this->addReader($reader);

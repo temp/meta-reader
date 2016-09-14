@@ -14,21 +14,21 @@ namespace Temp\MetaReader;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Reader interface
+ * Reader interface.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
 interface ReaderInterface
 {
     /**
-     * Check if requirements for reader are given
+     * Check if requirements for reader are given.
      *
      * @return bool
      */
     public function available();
 
     /**
-     * Check if reader supports the given file
+     * Check if reader supports the given file.
      *
      * @param string $filename
      *
@@ -37,7 +37,7 @@ interface ReaderInterface
     public function supports($filename);
 
     /**
-     * Read meta
+     * Read meta.
      *
      * @param string $filename
      *

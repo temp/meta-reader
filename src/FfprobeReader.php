@@ -17,7 +17,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Ffprobe reader
+ * Ffprobe reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -56,7 +56,7 @@ class FfprobeReader implements ReaderInterface
         }
 
         foreach ($streams as $stream) {
-            if (!$stream->has('codec_type') || !in_array($stream->get('codec_type'), array('audio', 'video'))) {
+            if (!$stream->has('codec_type') || !in_array($stream->get('codec_type'), ['audio', 'video'])) {
                 return false;
             }
         }
@@ -101,7 +101,7 @@ class FfprobeReader implements ReaderInterface
             foreach ($streams as $stream) {
                 /* @var $stream Stream */
                 $index = $stream->get('index');
-                $prefix = 'stream_' . $index;
+                $prefix = 'stream_'.$index;
 
                 $type = 'media';
                 if ($stream->isVideo()) {

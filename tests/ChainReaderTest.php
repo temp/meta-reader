@@ -16,7 +16,7 @@ use Temp\MetaReader\ChainReader;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Chain reader test
+ * Chain reader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -59,7 +59,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $readerMock1->supports(Argument::cetera())->willReturn(false);
         $this->reader->addReader($readerMock1->reveal());
 
-        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
+        $isSupported = $this->reader->supports(__DIR__.'/fixture/file.jpg');
 
         $this->assertFalse($isSupported);
     }
@@ -71,7 +71,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $readerMock1->supports(Argument::cetera())->willReturn(true);
         $this->reader->addReader($readerMock1->reveal());
 
-        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
+        $isSupported = $this->reader->supports(__DIR__.'/fixture/file.jpg');
 
         $this->assertTrue($isSupported);
     }
@@ -84,7 +84,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $readerMock1->read(Argument::cetera())->willReturn(new ValueBag());
         $this->reader->addReader($readerMock1->reveal());
 
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.jpg');
 
         $this->assertCount(0, $meta);
     }

@@ -19,7 +19,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Exiftool reader
+ * Exiftool reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

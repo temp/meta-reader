@@ -12,7 +12,7 @@
 namespace Temp\MetaReader\Value;
 
 /**
- * Value bag
+ * Value bag.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -21,12 +21,12 @@ class ValueBag implements \Countable
     /**
      * @var ValueInterface[]
      */
-    private $values = array();
+    private $values = [];
 
     /**
      * @param array $values
      */
-    public function __construct(array $values = array())
+    public function __construct(array $values = [])
     {
         foreach ($values as $key => $value) {
             if (!$value instanceof ValueInterface) {
@@ -51,12 +51,10 @@ class ValueBag implements \Countable
         if ($defaultValue !== null) {
             return new MetaValue($defaultValue);
         }
-
-        return null;
     }
 
     /**
-     * @param string $key
+     * @param string         $key
      * @param ValueInterface $value
      *
      * @return $this
@@ -102,7 +100,7 @@ class ValueBag implements \Countable
 
     public function toArray()
     {
-        $values = array();
+        $values = [];
         foreach ($this->all() as $key => $value) {
             $values[$key] = (string) $value;
         }
@@ -112,7 +110,7 @@ class ValueBag implements \Countable
 
     /**
      * @param ValueBag $attributes
-     * @param bool    $override
+     * @param bool     $override
      *
      * @return $this
      */

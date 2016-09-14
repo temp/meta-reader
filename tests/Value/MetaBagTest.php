@@ -14,7 +14,7 @@ namespace Temp\MetaReader\Tests\Value;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Meta bag test
+ * Meta bag test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -22,14 +22,14 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorValues()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
 
         $this->assertAttributeContains('bar', 'values', $metaBag);
     }
 
     public function testHasReturnsCorrectValue()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
 
         $this->assertTrue($metaBag->has('foo'));
         $this->assertFalse($metaBag->has('invalid'));
@@ -37,7 +37,7 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReturnsCorrectValue()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
 
         $this->assertSame('bar', (string) $metaBag->get('foo'));
     }
@@ -58,7 +58,7 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveWithValidKeyRemovesValue()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
 
         $metaBag->remove('foo');
 
@@ -76,8 +76,8 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testMerge()
     {
-        $metaBag = new ValueBag(array('foo' => 1));
-        $mergeMetaBag = new ValueBag(array('bar' => 2));
+        $metaBag = new ValueBag(['foo' => 1]);
+        $mergeMetaBag = new ValueBag(['bar' => 2]);
 
         $metaBag->merge($mergeMetaBag);
 
@@ -86,8 +86,8 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testMergeWithoutOverride()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
-        $mergeMetaBag = new ValueBag(array('foo' => 'baz'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
+        $mergeMetaBag = new ValueBag(['foo' => 'baz']);
 
         $metaBag->merge($mergeMetaBag);
 
@@ -97,8 +97,8 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testMergeWithOverride()
     {
-        $metaBag = new ValueBag(array('foo' => 'bar'));
-        $mergeMetaBag = new ValueBag(array('foo' => 'baz'));
+        $metaBag = new ValueBag(['foo' => 'bar']);
+        $mergeMetaBag = new ValueBag(['foo' => 'baz']);
 
         $metaBag->merge($mergeMetaBag, true);
 
@@ -108,7 +108,7 @@ class MetaBagTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
-        $metaBag = new ValueBag(array('foo' => 1, 'bar' => 2, 'baz' => 3));
+        $metaBag = new ValueBag(['foo' => 1, 'bar' => 2, 'baz' => 3]);
 
         $this->assertSame(3, $metaBag->count());
         $this->assertCount(3, $metaBag);
