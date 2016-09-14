@@ -12,7 +12,7 @@
 namespace Temp\MetaReader\Value;
 
 /**
- * Meta value
+ * Meta value.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Temp\MetaReader\ExiftoolReader;
 
 /**
- * Exif tool reader test
+ * Exif tool reader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -46,21 +46,21 @@ class ExiftoolReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsJpgFile()
     {
-        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.jpg');
+        $isSupported = $this->reader->supports(__DIR__.'/fixture/file.jpg');
 
         $this->assertTrue($isSupported);
     }
 
     public function testSupportsTxtFile()
     {
-        $isSupported = $this->reader->supports(__DIR__ . '/fixture/file.txt');
+        $isSupported = $this->reader->supports(__DIR__.'/fixture/file.txt');
 
         $this->assertFalse($isSupported);
     }
 
     public function testReadJpgFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.jpg');
 
         $this->assertCount(21, $meta);
         $this->assertTrue($meta->has('File.FileType'));
@@ -68,7 +68,7 @@ class ExiftoolReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadTextFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

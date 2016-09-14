@@ -16,7 +16,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Image analyzer reader
+ * Image analyzer reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

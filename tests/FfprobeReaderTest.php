@@ -12,11 +12,10 @@
 namespace Temp\MetaReader\Tests;
 
 use FFMpeg\FFProbe;
-use Prophecy\Argument;
 use Temp\MetaReader\FfprobeReader;
 
 /**
- * Ffprobe reader test
+ * Ffprobe reader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -47,17 +46,17 @@ class FfprobeReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsJpgFile()
     {
-        $this->assertTrue($this->reader->supports(__DIR__ . '/fixture/file.jpg'));
+        $this->assertTrue($this->reader->supports(__DIR__.'/fixture/file.jpg'));
     }
 
     public function testSupportsPdfFile()
     {
-        $this->assertFalse($this->reader->supports(__DIR__ . '/fixture/file.pdf'));
+        $this->assertFalse($this->reader->supports(__DIR__.'/fixture/file.pdf'));
     }
 
     public function testReadJpgFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.jpg');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.jpg');
 
         $this->assertCount(9, $meta);
         $this->assertTrue($meta->has('media.format_name'));
@@ -66,7 +65,7 @@ class FfprobeReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadPdfFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.pdf');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.pdf');
 
         $this->assertCount(0, $meta);
     }

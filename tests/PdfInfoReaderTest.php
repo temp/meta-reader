@@ -15,7 +15,7 @@ use Poppler\Processor\PdfFile;
 use Temp\MetaReader\PdfInfoReader;
 
 /**
- * pdfinfo reader test
+ * pdfinfo reader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -52,17 +52,17 @@ class PdfInfoReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testSupportsPdfFile()
     {
-        $this->assertTrue($this->reader->supports(__DIR__ . '/fixture/file.pdf'));
+        $this->assertTrue($this->reader->supports(__DIR__.'/fixture/file.pdf'));
     }
 
     public function testSupportsTxtFile()
     {
-        $this->assertFalse($this->reader->supports(__DIR__ . '/fixture/file.txt'));
+        $this->assertFalse($this->reader->supports(__DIR__.'/fixture/file.txt'));
     }
 
     public function testReadPdfFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.pdf');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.pdf');
 
         $this->assertCount(18, $meta);
         $this->assertSame('This is a test PDF file', (string) $meta->get('pdfinfo.title'));
@@ -70,7 +70,7 @@ class PdfInfoReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadTextFile()
     {
-        $meta = $this->reader->read(__DIR__ . '/fixture/file.txt');
+        $meta = $this->reader->read(__DIR__.'/fixture/file.txt');
 
         $this->assertCount(0, $meta);
     }

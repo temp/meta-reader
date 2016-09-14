@@ -15,7 +15,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Zip extension reader
+ * Zip extension reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -35,6 +35,7 @@ class ZipExtensionReader implements ReaderInterface
     public function supports($filename)
     {
         $zip = new \ZipArchive();
+
         return $zip->open($filename) === true;
     }
 

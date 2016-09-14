@@ -15,7 +15,7 @@ use Temp\MetaReader\Value\MetaValue;
 use Temp\MetaReader\Value\ValueBag;
 
 /**
- * Exif extension reader
+ * Exif extension reader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
