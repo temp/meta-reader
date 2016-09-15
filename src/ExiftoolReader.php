@@ -97,7 +97,7 @@ class ExiftoolReader implements ReaderInterface
             );
         }
 
-        foreach ($fileEntity as $metadata) {
+        foreach ($fileEntity->getMetadatas() as $metadata) {
             /* @var $metadata Metadata */
 
             if (ValueInterface::TYPE_BINARY === $metadata->getValue()->getType()) {

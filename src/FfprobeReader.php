@@ -99,7 +99,6 @@ class FfprobeReader implements ReaderInterface
             $streams = $this->ffprobe->streams($filename);
 
             foreach ($streams as $stream) {
-                /* @var $stream Stream */
                 $index = $stream->get('index');
                 $prefix = 'stream_'.$index;
 

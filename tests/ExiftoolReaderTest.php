@@ -62,7 +62,7 @@ class ExiftoolReaderTest extends \PHPUnit_Framework_TestCase
     {
         $meta = $this->reader->read(__DIR__.'/fixture/file.jpg');
 
-        $this->assertCount(21, $meta);
+        $this->assertCount(23, $meta);
         $this->assertTrue($meta->has('File.FileType'));
     }
 
